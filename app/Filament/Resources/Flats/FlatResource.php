@@ -7,27 +7,25 @@ use App\Filament\Resources\Flats\Pages\EditFlat;
 use App\Filament\Resources\Flats\Pages\ListFlats;
 use App\Filament\Resources\Flats\Tables\FlatsTable;
 use App\Models\Flat;
-use BackedEnum;
 use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class FlatResource extends Resource
 {
     protected static ?string $model = Flat::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'flat_no';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Property Management';
+    protected static ?string $navigationGroup = 'Property Management';
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return $schema
-            ->components([
+        return $form
+            ->schema([
 
                 Forms\Components\Select::make('project_id')
                     ->relationship('project', 'name')

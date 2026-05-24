@@ -9,28 +9,25 @@ use App\Filament\Resources\Projects\Pages\ViewProject;
 use App\Filament\Resources\Projects\Schemas\ProjectForm;
 use App\Filament\Resources\Projects\Tables\ProjectsTable;
 use App\Models\Project;
-use BackedEnum;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Property Management';
+    protected static ?string $navigationGroup = 'Property Management';
 
-    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return ProjectForm::configure($schema);
+        return ProjectForm::configure($form);
     }
 
     public static function table(Table $table): Table

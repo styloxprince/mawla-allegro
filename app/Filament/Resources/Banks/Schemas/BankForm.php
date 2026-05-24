@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\Banks\Schemas;
 
-use Filament\Schemas\Schema;
+use Filament\Forms\Form;
 
 class BankForm
 {
-    public static function configure(Schema $schema): Schema
+    public static function configure(Form $form): Form
     {
-        return $schema
-            ->components([
+        return $form
+            ->schema([
                 //
             ]);
     }

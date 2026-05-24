@@ -5,14 +5,14 @@ namespace App\Filament\Resources\Customers\Schemas;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
-use Filament\Schemas\Schema;
+use Filament\Forms\Form;
 
 class CustomerForm
 {
-    public static function configure(Schema $schema): Schema
+    public static function configure(Form $form): Form
     {
-        return $schema
-            ->components([
+        return $form
+            ->schema([
                 TextInput::make('project_id')
                     ->required()
                     ->numeric(),

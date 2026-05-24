@@ -13,72 +13,41 @@ use App\Models\Flat;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Filament\Forms;
-use UnitEnum;
 
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Sales';
+    protected static ?string $navigationGroup = 'Projects';
     
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'name';
 
-   public static function form(Schema $schema): Schema
-{
-    return $schema
-        ->components([
-
-            Forms\Components\Select::make('project_id')
-                ->relationship('project', 'name')
-                ->searchable()
-                ->preload()
-                ->required(),
-
-            Forms\Components\Select::make('flat_id')
-                ->relationship('flat', 'flat_no')
-                ->searchable()
-                ->preload(),
-
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                 
             Forms\Components\TextInput::make('name')
                 ->required(),
 
-            Forms\Components\TextInput::make('phone'),
-
+            Forms\Components\TextInput::make('phone')
+                ->required(),
             Forms\Components\TextInput::make('email')
                 ->email(),
+            
+            Forms\Components\TextInput::make('profession'),
 
             Forms\Components\TextInput::make('nid'),
 
-            Forms\Components\Textarea::make('address'),
-
-            Forms\Components\TextInput::make('nominee_name'),
-
-            Forms\Components\TextInput::make('nominee_phone'),
-
-            Forms\Components\DatePicker::make('booking_date'),
-
-            Forms\Components\TextInput::make('total_amount')
-                ->numeric()
-                ->prefix('৳'),
-
-            Forms\Components\Textarea::make('notes')
-                ->columnSpanFull(),
-
+            Forms\Components\TextInput::make('address'),
         ])
-        ->columns(2);
-}
-   
-   
-   
-
+        ->columns(3);
+    }
     public static function table(Table $table): Table
     {
         return CustomersTable::configure($table);

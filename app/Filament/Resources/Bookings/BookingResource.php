@@ -7,33 +7,31 @@ use App\Filament\Resources\Bookings\Pages\EditBooking;
 use App\Filament\Resources\Bookings\Pages\ListBookings;
 use App\Models\Booking;
 use App\Models\Flat;
-use BackedEnum;
+
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use UnitEnum;
+use Filament\Forms\Components\Get;
+use Filament\Forms\Components\Set;
 
 class BookingResource extends Resource
 {
     protected static ?string $model = Booking::class;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Sales';
+    protected static ?string $navigationGroup = 'Sales';
 
     protected static ?string $navigationLabel = 'Bookings';
 
-    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     protected static ?int $navigationSort = 1;
 
@@ -44,10 +42,10 @@ class BookingResource extends Resource
         return 'booking_code';
     }
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return $schema
-            ->components([
+        return $form
+            ->schema([
 
                 /*
                 |--------------------------------------------------------------------------

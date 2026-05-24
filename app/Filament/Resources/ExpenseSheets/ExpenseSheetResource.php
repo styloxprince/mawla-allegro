@@ -8,25 +8,23 @@ use App\Filament\Resources\ExpenseSheets\Pages\ListExpenseSheets;
 use App\Filament\Resources\ExpenseSheets\Tables\ExpenseSheetsTable;
 use App\Models\ExpenseCategory;
 use App\Models\ExpenseSheet;
-use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater\TableColumn;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Get;
+use Filament\Forms\Components\Set;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
+
 
 class ExpenseSheetResource extends Resource
 {
     protected static ?string $model = ExpenseSheet::class;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Expense';
+    protected static ?string $navigationGroup = 'Expense';
 
-    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Expenses';
 
@@ -34,10 +32,10 @@ class ExpenseSheetResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'expense_date';
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return $schema
-            ->components([
+        return $form
+            ->schema([
                 Section::make('Expense Information')
                     ->schema([
                         Forms\Components\Select::make('project_id')

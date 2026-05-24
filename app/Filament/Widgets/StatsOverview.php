@@ -8,7 +8,7 @@ use App\Models\Customer;
 use App\Models\ExpenseItem;
 use App\Models\Flat;
 use App\Models\Project;
-use Filament\Support\Icons\Heroicon;
+// icons replaced with heroicon string names for Filament v3 compatibility
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -45,52 +45,52 @@ class StatsOverview extends BaseWidget
         return [
             Stat::make('Total Projects', number_format(Project::query()->count()))
                 ->description('All project records')
-                ->descriptionIcon(Heroicon::BuildingOffice2)
+                ->descriptionIcon('heroicon-o-building-office-2')
                 ->color('primary'),
 
             Stat::make('Total Flats', number_format(Flat::query()->count()))
                 ->description('Complete flat inventory')
-                ->descriptionIcon(Heroicon::HomeModern)
+                ->descriptionIcon('heroicon-o-home-modern')
                 ->color('info'),
 
             Stat::make('Sold Flats', number_format(Flat::query()->where('status', 'sold')->count()))
                 ->description('Completed flat sales')
-                ->descriptionIcon(Heroicon::ReceiptPercent)
+                ->descriptionIcon('heroicon-o-receipt-percent')
                 ->color('success'),
 
             Stat::make('Available Flats', number_format(Flat::query()->where('status', 'available')->count()))
                 ->description('Ready for booking')
-                ->descriptionIcon(Heroicon::Wallet)
+                ->descriptionIcon('heroicon-o-wallet')
                 ->color('warning'),
 
             Stat::make('Total Customers', number_format(Customer::query()->count()))
                 ->description('Registered customers')
-                ->descriptionIcon(Heroicon::UserGroup)
+                ->descriptionIcon('heroicon-o-user-group')
                 ->color('gray'),
 
             Stat::make('Total Expense', self::formatBdt($totalExpense))
                 ->description('Calculated from expense items')
-                ->descriptionIcon(Heroicon::Banknotes)
+                ->descriptionIcon('heroicon-o-banknotes')
                 ->color('danger'),
 
             Stat::make('Monthly Expense', self::formatBdt($monthlyExpense))
                 ->description(now()->format('F Y'))
-                ->descriptionIcon(Heroicon::ChartBar)
+                ->descriptionIcon('heroicon-o-chart-bar')
                 ->color('warning'),
 
             Stat::make('Total Sales', self::formatBdt($totalSales))
                 ->description('Non-cancelled booking value')
-                ->descriptionIcon(Heroicon::CurrencyBangladeshi)
+                ->descriptionIcon('heroicon-o-currency-dollar')
                 ->color('success'),
 
             Stat::make('Total Due', self::formatBdt($totalDue))
                 ->description('Outstanding booking balance')
-                ->descriptionIcon(Heroicon::CreditCard)
+                ->descriptionIcon('heroicon-o-credit-card')
                 ->color('danger'),
 
             Stat::make('Total Received', self::formatBdt($totalReceived))
                 ->description('All booking payments')
-                ->descriptionIcon(Heroicon::Banknotes)
+                ->descriptionIcon('heroicon-o-banknotes')
                 ->color('primary'),
         ];
     }

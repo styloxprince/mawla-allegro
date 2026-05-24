@@ -7,29 +7,22 @@ use App\Filament\Resources\Banks\Pages\EditBank;
 use App\Filament\Resources\Banks\Pages\ListBanks;
 use App\Models\Bank;
 
-use BackedEnum;
-use UnitEnum;
-
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-
 use Filament\Tables\Table;
 use Filament\Tables;
-
-use Filament\Support\Icons\Heroicon;
 
 class BankResource extends Resource
 {
     protected static ?string $model = Bank::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'bank_name';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Finance';
+    protected static ?string $navigationGroup = 'Finance';
 
     protected static ?string $navigationLabel = 'Banks';
 
@@ -37,10 +30,10 @@ class BankResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Banks';
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return $schema
-            ->components([
+        return $form
+            ->schema([
                 Section::make('Bank Information')
                     ->schema([
 

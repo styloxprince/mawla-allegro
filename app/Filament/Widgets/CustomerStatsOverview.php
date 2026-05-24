@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Customer;
-use Filament\Support\Icons\Heroicon;
+// icons replaced with heroicon string names for Filament v3 compatibility
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -29,22 +29,22 @@ class CustomerStatsOverview extends BaseWidget
         return [
             Stat::make('Booked Flats', number_format($this->record?->bookings()->count() ?? 0))
                 ->description('Total bookings')
-                ->descriptionIcon(Heroicon::HomeModern)
+                ->descriptionIcon('heroicon-o-home-modern')
                 ->color('info'),
 
             Stat::make('Total Paid', StatsOverview::formatBdt($totalPaid))
                 ->description('Payment history total')
-                ->descriptionIcon(Heroicon::Banknotes)
+                ->descriptionIcon('heroicon-o-banknotes')
                 ->color('success'),
 
             Stat::make('Due Amount', StatsOverview::formatBdt($totalDue))
                 ->description('Outstanding booking balance')
-                ->descriptionIcon(Heroicon::CreditCard)
+                ->descriptionIcon('heroicon-o-credit-card')
                 ->color($totalDue > 0 ? 'danger' : 'success'),
 
             Stat::make('Active Status', ucfirst((string) ($this->record?->bookings()->latest()->value('status') ?? 'No booking')))
                 ->description('Latest booking status')
-                ->descriptionIcon(Heroicon::ClipboardDocumentCheck)
+                ->descriptionIcon('heroicon-o-clipboard-document-check')
                 ->color('primary'),
         ];
     }

@@ -8,37 +8,35 @@ use App\Filament\Resources\BookingPayments\Pages\ListBookingPayments;
 use App\Filament\Widgets\StatsOverview;
 use App\Models\Booking;
 use App\Models\BookingPayment;
-use BackedEnum;
+
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class BookingPaymentResource extends Resource
 {
     protected static ?string $model = BookingPayment::class;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Sales';
+    protected static ?string $navigationGroup = 'Sales';
 
     protected static ?string $navigationLabel = 'Payments';
 
-    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedBanknotes;
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?int $navigationSort = 2;
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return $schema
-            ->components([
+        return $form
+            ->schema([
 
                 Section::make('Booking Summary')
                     ->schema([
@@ -144,12 +142,6 @@ class BookingPaymentResource extends Resource
                                 in_array($get('payment_method'), ['Bank', 'Bkash', 'Nagad'])
                             ),
 
-                        Forms\Components\TextInput::make('transaction_id')
-    ->label('Transaction ID')
-    ->visible(fn ($get) =>
-        in_array($get('payment_method'), ['Bank', 'Cash'])
-    ),
-
                         Forms\Components\Textarea::make('note')
                             ->columnSpanFull(),
 
@@ -189,12 +181,6 @@ class BookingPaymentResource extends Resource
                 TextColumn::make('payment_method')
                     ->badge()
                     ->color('info'),
-
-                TextColumn::make('bank.bank_name')
-    ->label('Bank'),
-
-TextColumn::make('transaction_id')
-    ->label('Transaction ID'),
 
                 TextColumn::make('bank.bank_name')
                     ->label('Bank'),

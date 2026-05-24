@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Project;
-use Filament\Support\Icons\Heroicon;
+// icons replaced with heroicon string names for Filament v3 compatibility
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -31,22 +31,22 @@ class ProjectStatsOverview extends BaseWidget
         return [
             Stat::make('Total Budget', StatsOverview::formatBdt($budget))
                 ->description('Approved project budget')
-                ->descriptionIcon(Heroicon::Wallet)
+                ->descriptionIcon('heroicon-o-wallet')
                 ->color('primary'),
 
             Stat::make('Total Expense', StatsOverview::formatBdt($expense))
                 ->description('Calculated from expense items')
-                ->descriptionIcon(Heroicon::Banknotes)
+                ->descriptionIcon('heroicon-o-banknotes')
                 ->color('danger'),
 
             Stat::make('Remaining Budget', StatsOverview::formatBdt($remaining))
                 ->description($remaining >= 0 ? 'Budget still available' : 'Over budget')
-                ->descriptionIcon(Heroicon::ChartBar)
+                ->descriptionIcon('heroicon-o-chart-bar')
                 ->color($remaining >= 0 ? 'success' : 'danger'),
 
             Stat::make('Expense Progress', "{$progress}%")
                 ->description('Budget utilization')
-                ->descriptionIcon(Heroicon::ReceiptPercent)
+                ->descriptionIcon('heroicon-o-receipt-percent')
                 ->chart([$progress, max(0, 100 - $progress)])
                 ->color(match (true) {
                     $progress >= 90 => 'danger',
@@ -56,22 +56,22 @@ class ProjectStatsOverview extends BaseWidget
 
             Stat::make('Sold Flats', number_format($this->record?->flats()->where('status', 'sold')->count() ?? 0))
                 ->description('Completed sales')
-                ->descriptionIcon(Heroicon::HomeModern)
+                ->descriptionIcon('heroicon-o-home-modern')
                 ->color('success'),
 
             Stat::make('Available Flats', number_format($this->record?->flats()->where('status', 'available')->count() ?? 0))
                 ->description('Available inventory')
-                ->descriptionIcon(Heroicon::BuildingOffice2)
+                ->descriptionIcon('heroicon-o-building-office-2')
                 ->color('warning'),
 
             Stat::make('Bookings', number_format($this->record?->bookings()->count() ?? 0))
                 ->description('Project bookings')
-                ->descriptionIcon(Heroicon::ClipboardDocumentCheck)
+                ->descriptionIcon('heroicon-o-clipboard-document-check')
                 ->color('info'),
 
             Stat::make('Booking Sales', StatsOverview::formatBdt((float) ($this->record?->bookings()->where('status', '!=', 'cancelled')->sum('final_price') ?? 0)))
                 ->description('Non-cancelled booking value')
-                ->descriptionIcon(Heroicon::CurrencyBangladeshi)
+                ->descriptionIcon('heroicon-o-currency-dollar')
                 ->color('primary'),
         ];
     }

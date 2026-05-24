@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\Banks\Schemas;
 
-use Filament\Schemas\Schema;
+use Filament\Infolists\Infolist;
 
 class BankInfolist
 {
-    public static function configure(Schema $schema): Schema
+    public static function configure(Infolist $infolist): Infolist
     {
-        return $schema
-            ->components([
+        return $infolist
+            ->schema([
                 //
             ]);
     }
