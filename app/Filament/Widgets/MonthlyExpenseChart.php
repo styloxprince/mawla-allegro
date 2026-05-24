@@ -16,7 +16,7 @@ class MonthlyExpenseChart extends ChartWidget
 
     protected ?string $description = 'Last 12 months expense trend, calculated from expense items.';
 
-    protected string $color = 'warning';
+    protected static ?string $color = 'warning';
 
     protected ?string $maxHeight = '320px';
 
